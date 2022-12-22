@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import _debounce from 'lodash/debounce'
 import { callSearchMovieApi, setQuery } from '../redux/movie/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,10 +7,11 @@ import {signOut} from 'firebase/auth'
 import auth from '../base'
 import {logoutReq } from '../redux/user/actions';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { entries } from 'lodash';
 
 export default function Container({children, home}) {
     const {loggedIn, user} = useSelector(state => state.user);
-    const {query, page} = useSelector(state => state.movie);
+    const {query, page, totalPages, searchLoading} = useSelector(state => state.movie);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
