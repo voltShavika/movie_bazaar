@@ -2,27 +2,29 @@ import React from 'react'
 import store from "./redux/store.js"
 import {Provider} from 'react-redux'
 
-import Login from './pages/login'
-import Home from './pages/home'
-import Search from './pages/search'
-import MovieDescription from './pages/description'
 
 import{
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
-  useNavigate
+  useNavigate,
+  Navigate
 } from 'react-router-dom' ;
+
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard.js'
+import MovieDescription from './pages/Description'
 
 function App(){
   return(
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home/>}></Route>
+        <Route exact path="/" element={<Login/>}></Route>
+          <Route exact path="/movies" element={<Dashboard/>}></Route>
           <Route exact path="/movies/:index" element={<MovieDescription/>}></Route>
-          <Route exact path="/search" element={<Search/>}></Route>
+          <Route exact path="*" element={<Navigate to="/" />}></Route>
         </Routes>
       </Router>
     </Provider>
